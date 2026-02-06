@@ -15,7 +15,7 @@ export class LoginComponent {
   password: string = '';
 
   login() {
-    console.log('Usuario:', this.username);
+    console.log('Usuario test:', this.username);
     console.log('Password:', this.password);
 
     if (this.username !== '' && this.password !== '') {
