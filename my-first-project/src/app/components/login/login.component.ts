@@ -18,6 +18,8 @@ export class LoginComponent {
     console.log('Usuario test:', this.username);
     console.log('Password:', this.password);
 
+
+    if (this.username === '') console.log('USUARIO VACIO'); 
     if (this.username !== '' && this.password !== '') {
       const objectRequest: Login = {
         username: this.username,
