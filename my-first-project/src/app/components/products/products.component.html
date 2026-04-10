@@ -1,0 +1,95 @@
+<div class="catalog-container">
+  <div class="catalog-header">
+    <h2>Productos</h2>
+    <div class="header-actions">
+      <button mat-raised-button color="primary" (click)="onNew()">
+        <mat-icon>add</mat-icon> Nuevo Producto
+      </button>
+      <button mat-stroked-button (click)="onBack()">
+        <mat-icon>arrow_back</mat-icon> Volver
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="successMessage" class="success-msg">{{ successMessage }}</div>
+  <div *ngIf="errorMessage" class="error-msg">{{ errorMessage }}</div>
+
+  <mat-card *ngIf="showForm" class="form-card">
+    <mat-card-title>{{ editingId ? 'Editar Producto' : 'Nuevo Producto' }}</mat-card-title>
+    <mat-card-content>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nombre *</mat-label>
+        <input matInput [(ngModel)]="formData.nombre" name="nombre" required />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Descripción</mat-label>
+        <input matInput [(ngModel)]="formData.descripcion" name="descripcion" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>SKU</mat-label>
+        <input matInput [(ngModel)]="formData.sku" name="sku" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Código de Barras</mat-label>
+        <input matInput [(ngModel)]="formData.codigo_barras" name="codigo_barras" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Categoría *</mat-label>
+        <select matNativeControl [(ngModel)]="formData.category_id" name="category_id" required>
+          <option [ngValue]="undefined">-- Seleccionar --</option>
+          <option *ngFor="let c of categories" [ngValue]="c.id">{{ c.nombre }}</option>
+        </select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Marca</mat-label>
+        <select matNativeControl [(ngModel)]="formData.brand_id" name="brand_id">
+          <option [ngValue]="undefined">-- Sin marca --</option>
+          <option *ngFor="let b of brands" [ngValue]="b.id">{{ b.nombre }}</option>
+        </select>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="onSave()" [disabled]="saving">
+        <mat-icon>save</mat-icon> {{ saving ? 'Guardando...' : 'Guardar' }}
+      </button>
+      <button mat-stroked-button type="button" (click)="onCancel()">
+        <mat-icon>cancel</mat-icon> Cancelar
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+  <div *ngIf="loading" class="loading-msg">Cargando...</div>
+
+  <table *ngIf="!loading && items.length > 0" class="catalog-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>SKU</th>
+        <th>Categoría</th>
+        <th>Marca</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items">
+        <td>{{ item.id }}</td>
+        <td>{{ item.nombre }}</td>
+        <td>{{ item.descripcion || '—' }}</td>
+        <td>{{ item.sku || '—' }}</td>
+        <td>{{ item.category?.nombre || item.category_id }}</td>
+        <td>{{ item.brand?.nombre || '—' }}</td>
+        <td>
+          <button mat-icon-button color="primary" (click)="onEdit(item)" title="Editar">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="onDelete(item.id)" title="Eliminar">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p *ngIf="!loading && items.length === 0 && !errorMessage" class="empty-msg">No hay productos registrados.</p>
+</div>

@@ -1,0 +1,68 @@
+<div class="catalog-container">
+  <div class="catalog-header">
+    <h2>Ubicaciones</h2>
+    <div class="header-actions">
+      <button mat-raised-button color="primary" (click)="onNew()">
+        <mat-icon>add</mat-icon> Nueva Ubicación
+      </button>
+      <button mat-stroked-button (click)="onBack()">
+        <mat-icon>arrow_back</mat-icon> Volver
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="successMessage" class="success-msg">{{ successMessage }}</div>
+  <div *ngIf="errorMessage" class="error-msg">{{ errorMessage }}</div>
+
+  <mat-card *ngIf="showForm" class="form-card">
+    <mat-card-title>{{ editingId ? 'Editar Ubicación' : 'Nueva Ubicación' }}</mat-card-title>
+    <mat-card-content>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nombre *</mat-label>
+        <input matInput [(ngModel)]="formData.nombre" name="nombre" required />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Descripción</mat-label>
+        <input matInput [(ngModel)]="formData.descripcion" name="descripcion" />
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="onSave()" [disabled]="saving">
+        <mat-icon>save</mat-icon> {{ saving ? 'Guardando...' : 'Guardar' }}
+      </button>
+      <button mat-stroked-button type="button" (click)="onCancel()">
+        <mat-icon>cancel</mat-icon> Cancelar
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+  <div *ngIf="loading" class="loading-msg">Cargando...</div>
+
+  <table *ngIf="!loading && items.length > 0" class="catalog-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items">
+        <td>{{ item.id }}</td>
+        <td>{{ item.nombre }}</td>
+        <td>{{ item.descripcion || '—' }}</td>
+        <td>
+          <button mat-icon-button color="primary" (click)="onEdit(item)" title="Editar">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="onDelete(item.id)" title="Eliminar">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p *ngIf="!loading && items.length === 0 && !errorMessage" class="empty-msg">No hay ubicaciones registradas.</p>
+</div>
+

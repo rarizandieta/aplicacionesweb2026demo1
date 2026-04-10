@@ -1,0 +1,203 @@
+/* ─── HEADER ─────────────────────────────────────────── */
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  height: 64px;
+  background: linear-gradient(90deg, #1a237e, #3949ab);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-logo {
+  font-size: 28px !important;
+  width: 28px !important;
+  height: 28px !important;
+  color: #fff;
+}
+
+.header-title {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-btn {
+  color: #fff !important;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 20px;
+  padding: 0 16px;
+  transition: background 0.2s;
+}
+
+.nav-btn:hover {
+  background: rgba(255,255,255,0.15) !important;
+}
+
+.logout-btn:hover {
+  background: rgba(255,80,80,0.25) !important;
+}
+
+.nav-icon {
+  margin-right: 4px;
+}
+
+/* ─── MAIN ───────────────────────────────────────────── */
+.dashboard-main {
+  padding: 40px 32px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ─── WELCOME ────────────────────────────────────────── */
+.welcome-section {
+  margin-bottom: 36px;
+}
+
+.welcome-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a237e;
+  margin: 0 0 6px;
+}
+
+.welcome-name {
+  color: #3949ab;
+}
+
+.welcome-sub {
+  color: #757575;
+  margin: 0;
+  font-size: 15px;
+}
+
+/* ─── STAT CARDS ─────────────────────────────────────── */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 24px 28px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+.stat-blue {
+  background: linear-gradient(135deg, #1565c0, #42a5f5);
+  color: #fff;
+}
+
+.stat-red {
+  background: linear-gradient(135deg, #b71c1c, #ef5350);
+  color: #fff;
+}
+
+.stat-icon {
+  font-size: 42px !important;
+  width: 42px !important;
+  height: 42px !important;
+  opacity: 0.9;
+}
+
+.stat-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-value {
+  font-size: 38px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 13px;
+  opacity: 0.9;
+  margin-top: 4px;
+}
+
+/* ─── QUICK ACCESS ───────────────────────────────────── */
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #424242;
+  margin: 0 0 16px;
+}
+
+.quickaccess-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.quick-card {
+  cursor: pointer;
+  border-radius: 16px !important;
+  transition: transform 0.15s, box-shadow 0.15s;
+  overflow: hidden;
+  padding-bottom: 16px;
+}
+
+.quick-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15) !important;
+}
+
+.quick-icon-wrap {
+  padding: 20px 24px 12px;
+  display: flex;
+  align-items: center;
+}
+
+.quick-icon-wrap mat-icon {
+  font-size: 36px !important;
+  width: 36px !important;
+  height: 36px !important;
+}
+
+.blue-bg { background: #e3f2fd; }
+.red-bg  { background: #ffebee; }
+
+.quick-card mat-card-content h3 {
+  margin: 8px 0 6px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #212121;
+}
+
+.quick-card mat-card-content p {
+  margin: 0;
+  font-size: 13px;
+  color: #757575;
+  line-height: 1.5;
+}

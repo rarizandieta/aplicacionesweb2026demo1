@@ -1,0 +1,11 @@
+<mat-card class="user-card">
+  <mat-card-header>
+    <mat-card-title>Bienvenido, {{ username }}</mat-card-title>
+    <mat-card-subtitle>Has iniciado sesión correctamente</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-actions align="end">
+    <button mat-raised-button color="warn" (click)="onLogout()">
+      Cerrar Sesión
+    </button>
+  </mat-card-actions>
+</mat-card>

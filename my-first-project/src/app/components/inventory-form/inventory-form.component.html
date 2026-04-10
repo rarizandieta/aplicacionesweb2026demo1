@@ -1,0 +1,51 @@
+<div class="form-container">
+  <div class="form-header">
+    <h2>{{ item ? 'Editar Inventario' : 'Nuevo Inventario' }}</h2>
+    <p class="product-label" *ngIf="item?.product">Producto: <strong>{{ item?.product?.nombre }}</strong></p>
+  </div>
+
+  <div *ngIf="loading" class="loading-msg">Cargando datos...</div>
+
+  <div *ngIf="successMessage" class="success-msg">{{ successMessage }}</div>
+  <div *ngIf="errorMessage" class="error-msg">{{ errorMessage }}</div>
+
+  <form *ngIf="!loading" (ngSubmit)="onSave()" #inventoryForm="ngForm">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Cantidad Disponible</mat-label>
+      <input matInput type="number" [(ngModel)]="formData.cantidad_disponible" name="cantidad_disponible" required min="0" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Stock Mínimo</mat-label>
+      <input matInput type="number" [(ngModel)]="formData.stock_minimo" name="stock_minimo" min="0" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Stock Máximo</mat-label>
+      <input matInput type="number" [(ngModel)]="formData.stock_maximo" name="stock_maximo" min="0" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Unidad de Medida *</mat-label>
+      <select matNativeControl [(ngModel)]="formData.unit_id" name="unit_id" required>
+        <option value="">-- Seleccionar --</option>
+        <option *ngFor="let u of units" [value]="u.id">{{ u.nombre }}</option>
+      </select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Ubicación</mat-label>
+      <select matNativeControl [(ngModel)]="formData.location_id" name="location_id">
+        <option value="">-- Sin ubicación --</option>
+        <option *ngFor="let l of locations" [value]="l.id">{{ l.nombre }}</option>
+      </select>
+    </mat-form-field>
+
+    <div class="form-actions">
+      <button mat-raised-button color="primary" type="submit" [disabled]="saving">
+        {{ saving ? 'Guardando...' : 'Guardar' }}
+      </button>
+      <button mat-stroked-button type="button" (click)="onCancel()">Cancelar</button>
+    </div>
+  </form>
+</div>

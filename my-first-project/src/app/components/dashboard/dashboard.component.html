@@ -1,0 +1,117 @@
+<header class="app-header">
+  <div class="header-brand">
+    <mat-icon class="header-logo">inventory_2</mat-icon>
+    <span class="header-title">InventApp</span>
+  </div>
+  <nav class="header-nav">
+    <button mat-button class="nav-btn" routerLink="/inventory">
+      <mat-icon>storage</mat-icon> Inventario
+    </button>
+    <button mat-button class="nav-btn" [matMenuTriggerFor]="catalogosMenu">
+      <mat-icon>menu_book</mat-icon> Catálogos <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+    <mat-menu #catalogosMenu="matMenu">
+      <button mat-menu-item routerLink="/brands"><mat-icon>business</mat-icon> Marcas</button>
+      <button mat-menu-item routerLink="/categories"><mat-icon>label</mat-icon> Categorías</button>
+      <button mat-menu-item routerLink="/locations"><mat-icon>location_on</mat-icon> Ubicaciones</button>
+      <button mat-menu-item routerLink="/units-of-measure"><mat-icon>straighten</mat-icon> Unidades de Medida</button>
+      <button mat-menu-item routerLink="/products"><mat-icon>shopping_cart</mat-icon> Productos</button>
+    </mat-menu>
+    <button mat-button class="nav-btn logout-btn" (click)="onLogout()">
+      <mat-icon>logout</mat-icon> Cerrar Sesión
+    </button>
+  </nav>
+</header>
+
+<main class="dashboard-main">
+
+  <div class="welcome-section">
+    <h1 class="welcome-title">Bienvenido, <span class="welcome-name">{{ username }}</span></h1>
+    <p class="welcome-sub">Aquí tienes un resumen de tu sistema de inventario.</p>
+  </div>
+
+  <section class="stats-grid">
+
+    <div class="stat-card stat-blue" (click)="onInventario()">
+      <mat-icon class="stat-icon">storage</mat-icon>
+      <div class="stat-info">
+        <span class="stat-value">{{ loadingStats ? '...' : totalInventario }}</span>
+        <span class="stat-label">Productos en Inventario</span>
+      </div>
+    </div>
+
+    <div class="stat-card stat-red" (click)="onLowStock()">
+      <mat-icon class="stat-icon">warning</mat-icon>
+      <div class="stat-info">
+        <span class="stat-value">{{ loadingStats ? '...' : stockBajo }}</span>
+        <span class="stat-label">Productos con Stock Bajo</span>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="quickaccess-section">
+    <h2 class="section-title">Accesos Rápidos</h2>
+    <div class="quickaccess-grid">
+
+      <mat-card class="quick-card" (click)="onInventario()">
+        <div class="quick-icon-wrap blue-bg"><mat-icon>storage</mat-icon></div>
+        <mat-card-content>
+          <h3>Ver Inventario</h3>
+          <p>Consulta y edita el stock de todos tus productos.</p>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="quick-card" (click)="onLowStock()">
+        <div class="quick-icon-wrap red-bg"><mat-icon>warning</mat-icon></div>
+        <mat-card-content>
+          <h3>Stock Bajo</h3>
+          <p>Revisa los productos que están por debajo del stock mínimo.</p>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="quick-card" routerLink="/products" style="cursor:pointer">
+        <div class="quick-icon-wrap blue-bg"><mat-icon>shopping_cart</mat-icon></div>
+        <mat-card-content>
+          <h3>Productos</h3>
+          <p>Administra el catálogo de productos del sistema.</p>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="quick-card" routerLink="/categories" style="cursor:pointer">
+        <div class="quick-icon-wrap blue-bg"><mat-icon>label</mat-icon></div>
+        <mat-card-content>
+          <h3>Categorías</h3>
+          <p>Gestiona las categorías de productos.</p>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="quick-card" routerLink="/brands" style="cursor:pointer">
+        <div class="quick-icon-wrap blue-bg"><mat-icon>business</mat-icon></div>
+        <mat-card-content>
+          <h3>Marcas</h3>
+          <p>Administra las marcas disponibles.</p>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="quick-card" routerLink="/locations" style="cursor:pointer">
+        <div class="quick-icon-wrap blue-bg"><mat-icon>location_on</mat-icon></div>
+        <mat-card-content>
+          <h3>Ubicaciones</h3>
+          <p>Define las ubicaciones de almacenamiento.</p>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="quick-card" routerLink="/units-of-measure" style="cursor:pointer">
+        <div class="quick-icon-wrap blue-bg"><mat-icon>straighten</mat-icon></div>
+        <mat-card-content>
+          <h3>Unidades de Medida</h3>
+          <p>Gestiona las unidades de medida del inventario.</p>
+        </mat-card-content>
+      </mat-card>
+
+    </div>
+  </section>
+
+</main>
+

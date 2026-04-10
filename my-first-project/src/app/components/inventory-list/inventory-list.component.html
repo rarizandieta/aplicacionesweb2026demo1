@@ -1,0 +1,54 @@
+<div class="inventory-container">
+  <div class="inventory-header">
+    <h2>Inventario</h2>
+    <div class="header-actions">
+      <button mat-raised-button color="primary" routerLink="/products">
+        <mat-icon>add_shopping_cart</mat-icon> Nuevo Producto
+      </button>
+      <button mat-stroked-button color="warn" (click)="onViewLowStock()">
+        <mat-icon>warning</mat-icon> Stock Bajo
+      </button>
+      <button mat-stroked-button (click)="onBack()">
+        <mat-icon>arrow_back</mat-icon> Volver
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="loading-msg">Cargando inventario...</div>
+  <div *ngIf="errorMessage" class="error-msg">{{ errorMessage }}</div>
+
+  <table *ngIf="!loading && items.length > 0" class="inventory-table">
+    <thead>
+      <tr>
+        <th>Producto</th>
+        <th>Categoría</th>
+        <th>Marca</th>
+        <th>Cantidad</th>
+        <th>Stock Mín.</th>
+        <th>Stock Máx.</th>
+        <th>Unidad</th>
+        <th>Ubicación</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items" [class.low-stock-row]="item.stock_minimo != null && item.cantidad_disponible < item.stock_minimo">
+        <td>{{ item.product?.nombre }}</td>
+        <td>{{ item.product?.category?.nombre }}</td>
+        <td>{{ item.product?.brand?.nombre || '—' }}</td>
+        <td>{{ item.cantidad_disponible }}</td>
+        <td>{{ item.stock_minimo ?? '—' }}</td>
+        <td>{{ item.stock_maximo ?? '—' }}</td>
+        <td>{{ item.unit?.nombre }}</td>
+        <td>{{ item.location?.nombre || '—' }}</td>
+        <td>
+          <button mat-icon-button color="primary" (click)="onEdit(item.product_id)" title="Editar">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="!loading && items.length === 0 && !errorMessage" class="empty-msg">No hay registros de inventario.</p>
+</div>
